@@ -7,12 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+      name: Checkout
     - uses: actions/setup-node@v1
+      name: Install node.js
       with:
         node-version: '10.x'
     - run: npm install
+      name: Install dependencies
     - run: npm run test:prod && npm run build
+      name: Build
     - run: npm run semantic-release
+      name: Publish
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         GH_TOKEN: ${{ secrets.GITHUB_PUBLISH_TOKEN }}
