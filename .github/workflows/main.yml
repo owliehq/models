@@ -12,11 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-      name: Checkout
-      working-directory: packages/models
+      name: checkout
     - uses: actions/setup-node@v1
       name: Install node.js
-      working-directory: packages/models
       with:
         node-version: '10.x'
     - run: npm install
