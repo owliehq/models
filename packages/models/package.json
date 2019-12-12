@@ -33,7 +33,8 @@
     "report-coverage": "cat ./coverage/lcov.info | coveralls",
     "precommit": "lint-staged",
     "npm:publish": "npm publish --access public",
-    "prepush": "npm run test:prod && npm run build"
+    "prepush": "npm run test:prod && npm run build",
+    "semantic-release": "semantic-release"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
@@ -70,6 +71,7 @@
     ]
   },
   "devDependencies": {
+    "semantic-release": "^15.13.31",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.17.9",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
