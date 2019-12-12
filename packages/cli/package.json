@@ -1,4 +1,61 @@
 {
   "name": "@owliehq/models-cli",
-  "version": "0.0.0-development"
+  "version": "0.0.0-development",
+  "description": "Start Owlie Models project with a simple CLI",
+  "bin": {
+    "models": "./dist/index.js"
+  },
+  "keywords": [
+    "Git",
+    "CLI"
+  ],
+  "author": "HEN Xavier <uminily@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owliehq/models"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "build": "npm run build-ts && npm run lint",
+    "build-ts": "tsc",
+    "debug": "npm run build && npm run watch-debug",
+    "lint": "tsc --noEmit && eslint \"src/**/*.{js,ts}\" --quiet --fix",
+    "serve": "node dist/index.js",
+    "serve-debug": "nodemon --inspect dist/index.js",
+    "start": "npm run serve",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\"",
+    "watch-debug": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run serve-debug\"",
+    "watch-node": "nodemon dist/index.js",
+    "watch-ts": "tsc -w"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "clear": "^0.1.0",
+    "clui": "^0.3.6",
+    "configstore": "^5.0.0",
+    "figlet": "^1.2.4",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.0",
+    "minimist": "^1.2.0",
+    "shelljs": "^0.8.3"
+  },
+  "devDependencies": {
+    "@types/clear": "^0.1.0",
+    "@types/figlet": "^1.2.0",
+    "@types/fs-extra": "^8.0.1",
+    "@types/inquirer": "^6.5.0",
+    "@types/shelljs": "^0.8.6",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
+    "concurrently": "^5.0.1",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.3"
+  }
 }
