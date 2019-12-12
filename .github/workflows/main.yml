@@ -1,6 +1,11 @@
-name: CI
+name: Publish models package
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/models/**'
 
 jobs:
   build:
@@ -8,16 +13,21 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       name: Checkout
+      working-directory: ./packages/models
     - uses: actions/setup-node@v1
       name: Install node.js
+      working-directory: ./packages/models
       with:
         node-version: '10.x'
     - run: npm install
       name: Install dependencies
+      working-directory: ./packages/models
     - run: npm run test:prod && npm run build
       name: Build
+      working-directory: ./packages/models
     - run: npm run semantic-release
       name: Publish
+      working-directory: ./packages/models
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         GH_TOKEN: ${{ secrets.GITHUB_PUBLISH_TOKEN }}
