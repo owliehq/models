@@ -10,6 +10,7 @@ import { ModelPropertyMap } from './modelPropertyMap'
 import { ModelPropertyModel } from './modelPropertyModel'
 import { RegisterModelProperty } from './registers'
 
+// Initializes all default ModelProperties
 export function InitializeModelProperties() {
   RegisterModelProperty(ModelPropertyString, String)
   RegisterModelProperty(ModelPropertyNumber, Number)

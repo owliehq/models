@@ -3,6 +3,7 @@ import { ModelProperty } from './modelProperty'
 
 export const registeredCallbacks: IBasicObject = {}
 
+/** Registers a callback for the given modelName */
 export function registerCallbacks(modelName: string, callback: Function) {
   registeredCallbacks[modelName.toString()] = callback
 }
@@ -14,6 +15,10 @@ export interface IRegisteredModelProperty {
 
 export const registeredModelProperties: Array<IRegisteredModelProperty> = new Array<IRegisteredModelProperty>()
 
+/** Registers a ModelProperty
+ * If override is true, then forces the modelProperty to override any previously registered modelProperty for the given propertyClass
+ * If override is false, then if a modelProperty has already been registered for the given propertyClass, it returns an error
+*/
 export function RegisterModelProperty(
   modelPropertyClass: new () => ModelProperty,
   propertyClass: Function,
