@@ -238,4 +238,26 @@ describe('Model', () => {
     }
     expect(result).toBeTruthy()
   })
+  it('works if calling populate() of a ModelPropertyArray with no model makes a deep copy', async () => {
+
+    const model = new ModelPropertyArray()
+    const arr = await model.populate([5, 10, 15, {coucou: 15}], '')
+    expect(arr).toStrictEqual([5, 10, 15, {coucou: 15}])
+  })
+  it('works if calling populate(null) of ModelPropertyArray returns null', async () => {
+
+    const model = new ModelPropertyArray()
+    const arr = await model.populate(null, '')
+    expect(arr).toBe(null)
+  })
+  it('works if calling populate() with another parameter than an array returns an error', async () => {
+    const model = new ModelPropertyArray()
+    let throwedError = false
+    try {
+      await model.populate('', '')
+    } catch (error) {
+      throwedError = true
+    }
+    expect(throwedError).toBeTruthy()
+  })
 })

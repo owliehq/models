@@ -115,6 +115,40 @@ describe('First level of populating', () => {
   })
 
   //
+  it('should populate role twice', async () => {
+    const user = User.fromDatabase({
+      id: 'onche',
+      lastname: 'HEN',
+      firstname: 'Xavier',
+      role: 'abc',
+      cars: ['ecf', 'aeo', 'acf'],
+      subobject: {
+        ballek: true
+      }
+    })
+
+    await user.populate('role')
+
+    await user.populate('role')
+
+    expect(user).toMatchObject({
+      id: 'onche',
+      lastname: 'HEN',
+      firstname: 'Xavier',
+      role: {
+        id: 'abc',
+        name: 'admin',
+        write: true,
+        read: true
+      },
+      cars: ['ecf', 'aeo', 'acf'],
+      subobject: {
+        ballek: true
+      }
+    })
+  })
+
+  //
   it('should populate cars', async () => {
     const user = User.fromDatabase({
       id: 'onche',

@@ -1,4 +1,4 @@
-import { InitializeModelProperties, ModelPropertyModel, Model } from '../src/models'
+import { InitializeModelProperties, ModelPropertyModel, Model, registerCallbacks } from '../src/models'
 
 /**
  * Dummy test
@@ -242,6 +242,20 @@ describe('Model', () => {
     }
     expect(result).toBeTruthy()
   })
+  it('works if calling fromDatabase(Boolean) of reference ModelPropertyModel returns an error', () => {
+    let result = false
+    try {
+      const model = new ModelPropertyModel()
+      model.loadSchema({
+        model: myModel,
+        reference: true
+      })
+      model.fromDatabase(true)
+    } catch (error) {
+      result = true
+    }
+    expect(result).toBeTruthy()
+  })
   it('works if calling fromDatabase(string) of reference ModelPropertyModel works', () => {
     let result = true
     try {
@@ -256,6 +270,67 @@ describe('Model', () => {
     }
     expect(result).toBeTruthy()
   })
+  it('works if assigning null to a modelProperty assigns null', () => {
+    let result = true
+    try {
+      const model = new mainModel()
+      model.model = null
+      result = model.model === null
+    } catch (error) {
+      result = false
+    }
+    expect(result).toBeTruthy()
+  })
+  it('works if assigning a boolean to a reference modelProperty throws an error', () => {
+    let result = false
+    try {
+      const model = new mainModelReference()
+      model.model = true
+    } catch (error) {
+      result = true
+    }
+    expect(result).toBeTruthy()
+  })
+  it('works if assigning a value to a non reference modelProperty returns an error', () => {
+    let result = false
+    try {
+      const model = new mainModel()
+      model.model = {}
+    } catch (error) {
+      result = true
+    }
+    expect(result).toBeTruthy()
+  })
+  it('works if assigning a value to a non reference modelProperty returns an error', () => {
+    let result = false
+    try {
+      const model = new mainModel()
+      model.model = {}
+    } catch (error) {
+      result = true
+    }
+    expect(result).toBeTruthy()
+  })
+  it('works if assigning a value to a populated reference modelProperty works', async () => {
+    registerCallbacks('myModel', async (foreignKeyValue: string) => {
+      return {
+        id: foreignKeyValue,
+        num: 10
+      }
+    })
+
+    let result = true
+    try {
+      const model = new mainModelReference()
+      model.model = 'abc'
+      await model.populate('model')
+      model.model = 'def'
+    } catch (error) {
+      console.error(error)
+      result = false
+    }
+    expect(result).toBeTruthy()
+  })
 })
 
 class myModel extends Model {
@@ -264,6 +339,28 @@ class myModel extends Model {
     this.loadSchema({
       id: String,
       num: Number
+    })
+  }
+}
+
+class mainModel extends Model {
+  constructor() {
+    super()
+    this.loadSchema({
+      model: myModel,
+    })
+  }
+}
+
+class mainModelReference extends Model {
+  constructor() {
+    super()
+    this.loadSchema({
+      model: {
+        type: Model,
+        model: myModel,
+        reference: true
+      }
     })
   }
 }

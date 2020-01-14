@@ -27,14 +27,10 @@ export class ModelPropertyModel extends ModelProperty {
     }
 
     if (this.isReference) {
-      if (!(typeof value === 'string' || typeof value === 'number')) {
+      if (typeof value !== 'string') {
         throw new Error('Cannot update a reference ModelPropertyModel with something else than a string')
       }
-      if (this.isPopulated) {
-        const model: Model = new this._model()
-        model.loadFromDatabase({ [model.getForeignKey().toString()]: value })
-        return model
-      }
+      this.isPopulated = false
       return value
     }
     throw new Error('Cannot update a non reference ModelPropertyModel')
@@ -45,7 +41,7 @@ export class ModelPropertyModel extends ModelProperty {
     if (value === null) {
       return null
     }
-    if (typeof value === 'string' || typeof value === 'number') {
+    if (typeof value === 'string') {
       if (!this.isReference) {
         throw new Error('ModelPropertyModel cannot clone a string if isReference is false')
       }
@@ -59,7 +55,7 @@ export class ModelPropertyModel extends ModelProperty {
     if (value === null) {
       return null
     }
-    if (typeof value === 'string' || typeof value === 'number') {
+    if (typeof value === 'string') {
       if (!this.isReference) {
         throw new Error('ModelPropertyModel cannot toDatabase a string if isReference is false')
       }
@@ -76,15 +72,23 @@ export class ModelPropertyModel extends ModelProperty {
    * @param value
    */
   public async populate(value: any, path: string | IBasicObject): Promise<any> {
-    if (typeof value === 'string' || typeof value === 'number') {
-      const model = new this._model()
+    if (this.isPopulated) {
+      const model = value
       const name = model.constructor.name
-      const fromPopulation = await registeredCallbacks[name](value)
+      const fromPopulation = await registeredCallbacks[name](model[model.getForeignKey().toString()])
       model.loadFromDatabase(fromPopulation)
       await model.populate(path)
       this.isPopulated = true
       return model
     }
+
+    const model = new this._model()
+    const name = model.constructor.name
+    const fromPopulation = await registeredCallbacks[name](value)
+    model.loadFromDatabase(fromPopulation)
+    await model.populate(path)
+    this.isPopulated = true
+    return model
   }
 
   /** Translate 'data' from a database form to a property form and returns it */
@@ -97,7 +101,7 @@ export class ModelPropertyModel extends ModelProperty {
       return null
     }
 
-    if (typeof data === 'string' || typeof data === 'number') {
+    if (typeof data === 'string') {
       return this.update(data)
     }
 
