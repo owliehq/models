@@ -30,5 +30,8 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "dependencies": {
+    "git-cz": "^3.3.0"
   }
 }

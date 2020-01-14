@@ -1,5 +1,5 @@
-import { ModelProperty } from './modelProperty'
-import { IBasicObject } from '../base'
+import {IBasicObject} from '../interfaces/basicObject'
+import { ModelProperty } from '../engine/modelProperty'
 
 export class ModelPropertyNumber extends ModelProperty {
   private isInteger = false

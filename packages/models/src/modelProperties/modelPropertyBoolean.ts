@@ -1,4 +1,4 @@
-import { ModelProperty } from './modelProperty'
+import { ModelProperty } from '../engine/modelProperty'
 
 export class ModelPropertyBoolean extends ModelProperty {
   /** Returns an basic empty property of type managed by the modelProperty */

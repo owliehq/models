@@ -1,4 +1,4 @@
-import { InitializeModelProperties, ModelPropertySet, IBasicObject } from '../src/models'
+import { InitializeModelProperties, ModelPropertySet } from '../src/models'
 
 /**
  * Dummy test

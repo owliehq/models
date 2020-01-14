@@ -1,5 +1,5 @@
-import { IBasicObject } from '../base'
-import { registeredModelProperties } from './registers'
+import {IBasicObject} from '../interfaces/basicObject'
+import { registeredModelProperties } from './modelPropertyRegister'
 import { ModelProperty } from './modelProperty'
 import { Model } from './model'
 

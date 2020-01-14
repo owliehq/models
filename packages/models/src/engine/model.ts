@@ -1,7 +1,7 @@
-import { IBasicObject, Base } from '../base/index'
+import {IBasicObject} from '../interfaces/basicObject'
+import {newObjectFromObjectType} from '../utils/objectUtils'
 import { ModelProperty } from './modelProperty'
 import { ModelPropertyBuilder } from './modelPropertyBuilder'
-import { deconstructPath } from '../utils'
 
 export class Model {
   /** Class properties */
@@ -75,7 +75,7 @@ export class Model {
     }
 
     // Create a clone
-    const obj: IBasicObject = Base.newObjectFromObjectType(this) //be sure to create an object from the correct class
+    const obj: IBasicObject = newObjectFromObjectType(this) //be sure to create an object from the correct class
     Object.keys(this.__private__.modelProperties).forEach(key => {
       obj.__private__.propertyValues[key] = this.__private__.modelProperties[key].clone(this[key])
     })
@@ -113,6 +113,30 @@ export class Model {
     return model
   }
 
+  /**
+   *
+   * @param paths
+   */
+  private deconstructPath(paths: Array<string>): IBasicObject {
+    const _paths: IBasicObject = {}
+
+    paths.forEach(path => {
+      let currentObject: any = _paths
+      path.split('.').forEach(subpath => {
+        const _subpath = subpath.trim()
+        if (_subpath === '') {
+          return
+        }
+        if (!currentObject[_subpath]) {
+          currentObject[_subpath] = {}
+        }
+        currentObject = currentObject[_subpath]
+      })
+    })
+
+    return _paths
+  }
+
   /** Populates this model according to the populate string which is of form 'property1 property2 property3.subproperty1' */
   public async populate(populate: string | IBasicObject) {
     if (!this.__private__.initialized) {
@@ -122,7 +146,7 @@ export class Model {
     // Get all property paths from the populate string
     let paths = {} as IBasicObject
     if (typeof populate === 'string') {
-      paths = deconstructPath(populate.split(' '))
+      paths = this.deconstructPath(populate.split(' '))
     } else {
       paths = populate
     }
@@ -141,6 +165,7 @@ export class Model {
    * Don't override
    */
   public inspect() {
+    /* istanbul ignore next */
     return { ...this }
   }
 }

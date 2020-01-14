@@ -1,4 +1,4 @@
-import { IBasicObject } from '../base/index'
+import {IBasicObject} from '../interfaces/basicObject'
 
 export abstract class ModelProperty {
   private default?: any

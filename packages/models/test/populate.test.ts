@@ -30,6 +30,18 @@ describe('First level of populating', () => {
   })
 
   //
+  it('cannot populate a model if no schema has been loaded', async () => {
+    const noschema = new NoSchemaModel()
+    let throwedError = false
+    try {
+      await noschema.populate('')
+    } catch (error) {
+      throwedError = true
+    }
+    expect(throwedError).toBeTruthy()
+  })
+
+  //
   it('should create object with subobject', () => {
     const user = User.fromDatabase({
       id: 'onche',
@@ -286,5 +298,11 @@ class SubObject extends Model {
     this.loadSchema({
       ballek: Boolean
     })
+  }
+}
+
+class NoSchemaModel extends Model {
+  constructor() {
+    super()
   }
 }

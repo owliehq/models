@@ -1,7 +1,7 @@
-import { ModelProperty } from './modelProperty'
-import { IBasicObject } from '../base/index'
-import { Model } from './model'
-import { registeredCallbacks } from './registers'
+import {IBasicObject} from '../interfaces/basicObject'
+import { registeredCallbacks } from '../engine/callbackRegister'
+import { Model } from '../engine/model'
+import { ModelProperty } from '../engine/modelProperty'
 
 export class ModelPropertyModel extends ModelProperty {
   private _model: new () => Model = Model

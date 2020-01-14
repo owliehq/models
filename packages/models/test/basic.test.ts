@@ -1,4 +1,4 @@
-import { Base } from '../src/base/basic'
+import { newObjectFromObjectType } from '../src/utils/objectUtils'
 
 /**
  * Dummy test
@@ -8,7 +8,7 @@ describe('Model', () => {
     let result = true
     try {
       const obj = new myObject()
-      const newObj = Base.newObjectFromObjectType(obj)
+      const newObj = newObjectFromObjectType(obj)
       if (!(newObj instanceof myObject)) {
         result = false
       }

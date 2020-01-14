@@ -89,6 +89,16 @@ describe('Model', () => {
     }
     expect(result).toBeTruthy()
   })
+  it('cannot call populate if the modelProperty does not implement it', async () => {
+    const model = new myModelProperty()
+    let throwedError = false
+    try {
+      await model.populate('', '')
+    } catch (error) {
+      throwedError = true
+    }
+    expect(throwedError).toBeTruthy()
+  })
 })
 
 class myModelProperty extends ModelProperty {

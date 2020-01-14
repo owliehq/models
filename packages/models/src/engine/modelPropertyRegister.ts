@@ -1,12 +1,4 @@
-import { IBasicObject } from '../base/index'
 import { ModelProperty } from './modelProperty'
-
-export const registeredCallbacks: IBasicObject = {}
-
-/** Registers a callback for the given modelName */
-export function registerCallbacks(modelName: string, callback: Function) {
-  registeredCallbacks[modelName.toString()] = callback
-}
 
 export interface IRegisteredModelProperty {
   class: new () => ModelProperty

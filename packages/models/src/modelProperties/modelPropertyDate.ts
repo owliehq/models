@@ -1,4 +1,4 @@
-import { ModelProperty } from './modelProperty'
+import { ModelProperty } from '../engine/modelProperty'
 
 export class ModelPropertyDate extends ModelProperty {
   /** Returns an basic empty property of type managed by the modelProperty */

@@ -1,6 +1,6 @@
-import { ModelProperty } from './modelProperty'
-import { IBasicObject } from '../base/index'
-import { ModelPropertyBuilder } from './modelPropertyBuilder'
+import {IBasicObject} from '../interfaces/basicObject'
+import { ModelProperty } from '../engine/modelProperty'
+import { ModelPropertyBuilder } from '../engine/modelPropertyBuilder'
 export class ModelPropertyObject extends ModelProperty {
   private properties: {
     [key: string]: ModelProperty
