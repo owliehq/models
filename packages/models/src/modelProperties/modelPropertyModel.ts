@@ -27,7 +27,7 @@ export class ModelPropertyModel extends ModelProperty {
     }
 
     if (this.isReference) {
-      if (typeof value !== 'string') {
+      if (typeof value !== 'string' && typeof value !== 'number') {
         throw new Error('Cannot update a reference ModelPropertyModel with something else than a string')
       }
       this.isPopulated = false
@@ -41,9 +41,9 @@ export class ModelPropertyModel extends ModelProperty {
     if (value === null) {
       return null
     }
-    if (typeof value === 'string') {
+    if (typeof value === 'string' || typeof value === 'number') {
       if (!this.isReference) {
-        throw new Error('ModelPropertyModel cannot clone a string if isReference is false')
+        throw new Error('ModelPropertyModel cannot clone a string or number if isReference is false')
       }
       return value
     }
@@ -55,9 +55,9 @@ export class ModelPropertyModel extends ModelProperty {
     if (value === null) {
       return null
     }
-    if (typeof value === 'string') {
+    if (typeof value === 'string' || typeof value === 'number') {
       if (!this.isReference) {
-        throw new Error('ModelPropertyModel cannot toDatabase a string if isReference is false')
+        throw new Error('ModelPropertyModel cannot toDatabase a string or number if isReference is false')
       }
       return value
     }
@@ -101,7 +101,7 @@ export class ModelPropertyModel extends ModelProperty {
       return null
     }
 
-    if (typeof data === 'string') {
+    if (typeof data === 'string' || typeof data === 'number') {
       return this.update(data)
     }
 
