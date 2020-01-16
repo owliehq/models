@@ -22,6 +22,30 @@ module.exports = {
           '/1.x.x/getting-started/quick-start',
           '/1.x.x/getting-started/with-monorepo-config'
         ]
+      },
+      {
+        title: 'Types',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          '/1.x.x/types/types'
+        ]
+      },
+      {
+        title: 'Tests',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          '/1.x.x/tests/tests'
+        ]
+      },
+      {
+        title: 'Technical',
+        collapsable: false,
+        sidebarDepth: 1,
+        children: [
+          '/1.x.x/technical/overview'
+        ]
       }
     ],
     nav: [
