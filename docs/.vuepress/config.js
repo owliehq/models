@@ -20,6 +20,7 @@ module.exports = {
         children: [
           '/1.x.x/getting-started/introduction',
           '/1.x.x/getting-started/quick-start',
+          '/1.x.x/getting-started/manual-start',
           '/1.x.x/getting-started/with-monorepo-config'
         ]
       },
