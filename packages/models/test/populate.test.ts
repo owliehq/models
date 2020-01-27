@@ -1,8 +1,8 @@
-import { Model, registerCallbacks, InitializeModelProperties } from '../src/models'
+import { Model, registerCallbacks, Initialize } from '../src/models'
 
 describe('First level of populating', () => {
   beforeAll(() => {
-    InitializeModelProperties()
+    Initialize(null)
 
     registerCallbacks('Role', async () => {
       return {

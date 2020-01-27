@@ -1,5 +1,5 @@
 import {
-  InitializeModelProperties,
+  Initialize,
   RegisterModelProperty,
   ModelProperty,
   registeredModelProperties,
@@ -13,7 +13,7 @@ describe('Model', () => {
   it('works if Initialization works', () => {
     let result = true
     try {
-      InitializeModelProperties()
+      Initialize(null)
     } catch (error) {
       result = false
     }
@@ -66,14 +66,5 @@ class myModelProperty extends ModelProperty {
   }
   public fromDatabase(data: any): number {
     return 42
-  }
-}
-
-class myModel extends Model {
-  constructor() {
-    super()
-    this.loadSchema({
-      property: Number
-    })
   }
 }

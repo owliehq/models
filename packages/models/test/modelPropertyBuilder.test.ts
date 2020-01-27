@@ -1,5 +1,5 @@
 import {
-  InitializeModelProperties,
+  Initialize,
   ModelPropertyBuilder,
   Model,
   ModelProperty,
@@ -15,7 +15,7 @@ describe('Model', () => {
   it('works if Initialization works', () => {
     let result = true
     try {
-      InitializeModelProperties()
+      Initialize(null)
     } catch (error) {
       result = false
     }

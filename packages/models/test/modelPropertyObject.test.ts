@@ -1,4 +1,4 @@
-import { InitializeModelProperties, ModelPropertyObject } from '../src/models'
+import { Initialize, ModelPropertyObject } from '../src/models'
 import { IBasicObject } from '../src/interfaces/basicObject'
 
 /**
@@ -8,7 +8,7 @@ describe('Model', () => {
   it('works if Initialization works', () => {
     let result = true
     try {
-      InitializeModelProperties()
+      Initialize(null)
     } catch (error) {
       result = false
     }

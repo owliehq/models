@@ -2,6 +2,7 @@ import {IBasicObject} from '../interfaces/basicObject'
 import {newObjectFromObjectType} from '../utils/objectUtils'
 import { ModelProperty } from './modelProperty'
 import { ModelPropertyBuilder } from './modelPropertyBuilder'
+import { databaseController } from './modelContext'
 
 export class Model {
   /** Class properties */
@@ -28,6 +29,64 @@ export class Model {
       configurable: true,
       enumerable: false
     })
+  }
+
+  public static async query(params: Object): Promise<any> {
+    if (!databaseController) {
+      throw new Error('No DatabaseController hase been defined, please define it when calling Models.Initialize()')
+    }
+
+    return await databaseController.query(this.name, params)
+  }
+
+  public static async saveAll(models: Array<Model>): Promise<any> {
+    if (!databaseController) {
+      throw new Error('No DatabaseController hase been defined, please define it when calling Models.Initialize()')
+    }
+
+    const modelsInstanceOfThis = models.every(model => {
+      return model instanceof this
+    })
+
+    if (!modelsInstanceOfThis) {
+      throw new Error('Some specified models are not object from the expected model class, expected ' + this.name)
+    }
+
+    //TODO: check that each model in the array is from the expected Model class
+    return await databaseController.saveAll(models)
+  }
+
+  public static async removeAll(models: Array<Model>): Promise<any> {
+    if (!databaseController) {
+      throw new Error('No DatabaseController hase been defined, please define it when calling Models.Initialize()')
+    }
+
+    const modelsInstanceOfThis = models.every(model => {
+      return model instanceof this
+    })
+
+    if (!modelsInstanceOfThis) {
+      throw new Error('Some specified models are not object from the expected model class, expected ' + this.name)
+    }
+
+    //TODO: check that each model in the array is from the expected Model class
+    return await databaseController.removeAll(models)
+  }
+
+  public async save(): Promise<any> {
+    if (!databaseController) {
+      throw new Error('No DatabaseController hase been defined, please define it when calling Models.Initialize()')
+    }
+
+    return await databaseController.save(this)
+  }
+
+  public async remove(): Promise<any> {
+    if (!databaseController) {
+      throw new Error('No DatabaseController hase been defined, please define it when calling Models.Initialize()')
+    }
+
+    return await databaseController.remove(this)
   }
 
   /** Returns the foreignKey */

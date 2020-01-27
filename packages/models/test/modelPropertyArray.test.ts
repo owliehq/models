@@ -1,4 +1,4 @@
-import { InitializeModelProperties, ModelPropertyArray } from '../src/models'
+import { Initialize, ModelPropertyArray } from '../src/models'
 
 /**
  * Dummy test
@@ -7,7 +7,7 @@ describe('Model', () => {
   it('works if Initialization works', () => {
     let result = true
     try {
-      InitializeModelProperties()
+      Initialize(null)
     } catch (error) {
       result = false
     }

@@ -1,10 +1,10 @@
-import { InitializeModelProperties, RegisterModel, IBasicObject } from '@owlie/models'
+import { Initialize, RegisterModel, IBasicObject } from '@owlie/models'
 import * as Models from './models/index'
 
 /** Initializes the models */
 export function initialize() {
   // Init owlie modelProperties
-  InitializeModelProperties()
+  Initialize(null)
 
   // Init Models
   for (const key in Models) {

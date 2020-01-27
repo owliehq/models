@@ -1,24 +1,20 @@
-import { Model } from './engine/model'
-import { RegisterModelProperty } from './engine/modelPropertyRegister'
-import { ModelPropertyArray } from './modelProperties/modelPropertyArray'
-import { ModelPropertySet } from './modelProperties/modelPropertySet'
-import { ModelPropertyDate } from './modelProperties/modelPropertyDate'
-import { ModelPropertyNumber } from './modelProperties/modelPropertyNumber'
-import { ModelPropertyObject } from './modelProperties/modelPropertyObject'
-import { ModelPropertyBoolean } from './modelProperties/modelPropertyBoolean'
-import { ModelPropertyString } from './modelProperties/modelPropertyString'
-import { ModelPropertyMap } from './modelProperties/modelPropertyMap'
-import { ModelPropertyModel } from './modelProperties/modelPropertyModel'
+import { Model, RegisterModelProperty, DatabaseController, SetDatabaseController } from './engine'
+import { ModelPropertyArray, ModelPropertySet, ModelPropertyDate, ModelPropertyNumber, ModelPropertyObject, ModelPropertyBoolean, ModelPropertyString, ModelPropertyMap, ModelPropertyModel } from './modelProperties'
 
 // Initializes all default ModelProperties
 export function InitializeModelProperties() {
-  RegisterModelProperty(ModelPropertyString, String)
-  RegisterModelProperty(ModelPropertyNumber, Number)
-  RegisterModelProperty(ModelPropertyBoolean, Boolean)
-  RegisterModelProperty(ModelPropertyDate, Date)
-  RegisterModelProperty(ModelPropertyModel, Model)
-  RegisterModelProperty(ModelPropertyArray, Array)
-  RegisterModelProperty(ModelPropertySet, Set)
-  RegisterModelProperty(ModelPropertyMap, Map)
-  RegisterModelProperty(ModelPropertyObject, Object)
+  RegisterModelProperty(ModelPropertyString, String, true)
+  RegisterModelProperty(ModelPropertyNumber, Number, true)
+  RegisterModelProperty(ModelPropertyBoolean, Boolean, true)
+  RegisterModelProperty(ModelPropertyDate, Date, true)
+  RegisterModelProperty(ModelPropertyModel, Model, true)
+  RegisterModelProperty(ModelPropertyArray, Array, true)
+  RegisterModelProperty(ModelPropertySet, Set, true)
+  RegisterModelProperty(ModelPropertyMap, Map, true)
+  RegisterModelProperty(ModelPropertyObject, Object, true)
+}
+
+export function Initialize(databaseController: DatabaseController | null) {
+  InitializeModelProperties()
+  SetDatabaseController(databaseController)
 }

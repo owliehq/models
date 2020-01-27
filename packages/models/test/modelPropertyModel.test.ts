@@ -1,4 +1,4 @@
-import { InitializeModelProperties, ModelPropertyModel, Model, registerCallbacks } from '../src/models'
+import { Initialize, ModelPropertyModel, Model, registerCallbacks } from '../src/models'
 
 /**
  * Dummy test
@@ -7,7 +7,7 @@ describe('Model', () => {
   it('works if Initialization works', () => {
     let result = true
     try {
-      InitializeModelProperties()
+      Initialize(null)
     } catch (error) {
       result = false
     }
