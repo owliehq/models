@@ -71,6 +71,7 @@
     ]
   },
   "devDependencies": {
+    "@semantic-release/git": "^7.0.18",
     "semantic-release": "^15.13.31",
     "@types/jest": "^23.3.2",
     "@types/node": "^10.17.9",
