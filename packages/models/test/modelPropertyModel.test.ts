@@ -277,6 +277,7 @@ describe('Model', () => {
       model.model = null
       result = model.model === null
     } catch (error) {
+      console.error(error)
       result = false
     }
     expect(result).toBeTruthy()

@@ -16,7 +16,8 @@ export class ModelPropertyBuilder {
   /** Builds and returns the ModelProperty according to the setted schema and propertyName */
   public build(): ModelProperty {
     // Detects a Model
-    if (this._schema.prototype instanceof Model) {
+    //if (this._schema.prototype instanceof Model) {
+    if (Model.prototype.isPrototypeOf(this._schema.prototype)) {
       const modelSchema: IBasicObject = {
         type: Model,
         model: this._schema

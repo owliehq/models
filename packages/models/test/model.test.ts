@@ -142,7 +142,7 @@ describe('Model', () => {
     try {
       const car1 = Car.fromDatabase({ name: 'My beautiful car' })
       const car2 = Car.fromDatabase({ name: 'My ugly one' })
-
+      const test = new Test()
       expect(car1.name).toBe('My beautiful car')
       expect(car2.name).toBe('My ugly one')
     } catch (err) {
@@ -166,6 +166,20 @@ class Car extends Model {
     super()
     this.loadSchema({
       name: String
+    })
+  }
+}
+
+class Test extends Model {
+  constructor() {
+    super()
+    this.loadSchema({
+      name: String,
+      car: {
+        type: Model,
+        model: Car,
+        reference: true
+      }
     })
   }
 }
