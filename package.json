@@ -27,7 +27,7 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  }
+  },
   "scripts": {
     "commit": "git-cz",
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
