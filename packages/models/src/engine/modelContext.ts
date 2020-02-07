@@ -1,5 +1,5 @@
 import { ModelProperty } from './modelProperty'
-import { DatabaseController } from './DatabaseController'
+import { DatabaseController } from './databaseController'
 
 export let databaseController : null | DatabaseController = null
 export const registeredModelProperties = new Array<IRegisteredModelProperty>()
