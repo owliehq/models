@@ -1,6 +1,6 @@
 {
   "name": "@owliehq/models",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Organize & share your business logic ressources onto ODM style objects",
   "keywords": [],
   "main": "dist/models.umd.js",
