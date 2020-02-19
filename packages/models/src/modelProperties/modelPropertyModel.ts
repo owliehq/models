@@ -33,7 +33,11 @@ export class ModelPropertyModel extends ModelProperty {
       this.isPopulated = false
       return value
     }
-    throw new Error('Cannot update a non reference ModelPropertyModel')
+
+    if (!(value instanceof this._model)) {
+      throw new Error('Cannot update a non reference Model with something else than a Model')
+    }
+    return value
   }
 
   /** Clones 'value' */

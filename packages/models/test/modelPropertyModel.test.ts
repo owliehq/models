@@ -302,13 +302,23 @@ describe('Model', () => {
     }
     expect(result).toBeTruthy()
   })
-  it('works if assigning a value to a non reference modelProperty returns an error', () => {
+  it('works if assigning a wrong model to a non reference modelProperty returns an error', () => {
     let result = false
     try {
       const model = new mainModel()
-      model.model = {}
+      model.model = new mainModel()
     } catch (error) {
       result = true
+    }
+    expect(result).toBeTruthy()
+  })
+  it('works if assigning the right model to a non reference modelProperty works', () => {
+    let result = true
+    try {
+      const model = new mainModel()
+      model.model = new myModel()
+    } catch (error) {
+      result = false
     }
     expect(result).toBeTruthy()
   })
